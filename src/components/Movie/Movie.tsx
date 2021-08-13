@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-function Movie({title}: {title: string}) {
-  return <article>{title}</article>
+function Movie(data: {title: string}) {
+  return <article>{data.title}</article>
 }
 
 export default Movie;
