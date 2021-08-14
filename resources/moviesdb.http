@@ -2,3 +2,5 @@ GET https://api.themoviedb.org/3/movie/550?api_key=d7a3a18bf1f75a32e20a4c21012ba
 Accept: application/json
 
 ###
+
+GET https://api.themoviedb.org/3/search/movie?query=a&page=1&include_adult=false&api_key=d7a3a18bf1f75a32e20a4c21012ba47b

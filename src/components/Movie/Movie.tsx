@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-function Movie(data: {title: string}) {
+function Movie(data: {title: string, id: number}) {
   return <article>{data.title}</article>
 }
 

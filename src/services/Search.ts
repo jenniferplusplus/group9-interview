@@ -1,8 +1,8 @@
-import {Observable, Subject} from "rxjs";
+import {Observable, Subject, from, of} from "rxjs";
 
-class searchService {
+class SearchService {
     // TODO: Retrieve from secret store,
-    //  and preferably proxy through an api so secrets aren't exposed to the client at all
+    //  or preferably proxy through our own api so secrets aren't exposed to the client at all
     _apiKey = 'd7a3a18bf1f75a32e20a4c21012ba47b';
     _apiBasePath = 'https://api.themoviedb.org/3/search/movie';
     _subject: Subject<any>;
@@ -14,11 +14,17 @@ class searchService {
     }
 
     search(title: string, page = 1): Observable<any>{
+        if(title === '') {
+            this._subject.next({results: []});
+            return of();
+        }
+
         const url = `${this._apiBasePath}?query=${title}&page=${page}&include_adult=false&api_key=${(this._apiKey)}`;
-        fetch(url)
+        return from(fetch(url)
             .then(Response => Response.json())
-            .then(v => this._subject.next(v));
+            .then(v => this._subject.next(v)));
             // TODO: .catch and do something with errors
-        return this.results$;
     }
 }
+
+export default SearchService
