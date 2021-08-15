@@ -1,0 +1,20 @@
+#search {
+    width: 16em;
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
+.v-space {
+    width: 100%;
+    min-height: 4ch;
+}
+
+@media screen and (max-width: 576px){
+    #search {
+        width: 12em;
+        transform: translate(-50%, 2ch);
+        left: 50%;
+        position: absolute;
+    }
+}
