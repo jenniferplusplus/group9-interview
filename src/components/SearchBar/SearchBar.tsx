@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FocusEvent} from 'react';
+import {ChangeEvent, FocusEvent} from 'react';
 import {map, Observable, sampleTime} from 'rxjs';
 import {useEventCallback} from 'rxjs-hooks';
 import SearchService from '../../services/Search';

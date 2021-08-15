@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import MoviesApp from './MoviesApp'
+import MoviesApp from './views/MoviesApp'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

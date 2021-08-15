@@ -1,9 +1,9 @@
 import React from "react";
 import {useObservable} from "rxjs-hooks";
 import './MoviesApp.css';
-import Movie from "./components/Movie";
-import SearchBar from "./components/SearchBar";
-import SearchService, {SearchResult} from "./services/Search";
+import Movie from "../components/Movie";
+import SearchBar from "../components/SearchBar";
+import SearchService, {SearchResult} from "../services/Search";
 
 function MoviesApp() {
     const searchService = new SearchService();
