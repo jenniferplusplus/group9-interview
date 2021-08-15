@@ -5,8 +5,8 @@ class SearchService {
     //  or preferably proxy through our own api so secrets aren't exposed to the client at all
     _apiKey = 'd7a3a18bf1f75a32e20a4c21012ba47b';
     _apiBasePath = 'https://api.themoviedb.org/3/search/movie';
-    _subject: Subject<any>;
-    results$: Observable<any>;
+    _subject: Subject<SearchResult>;
+    results$: Observable<SearchResult>;
 
     constructor() {
         this._subject = new Subject<any>();
@@ -15,7 +15,7 @@ class SearchService {
 
     search(title: string, page = 1): Observable<any>{
         if(title === '') {
-            this._subject.next({results: []});
+            this._subject.next(emptyResult);
             return of();
         }
 
@@ -25,6 +25,32 @@ class SearchService {
             .then(v => this._subject.next(v)));
             // TODO: .catch and do something with errors
     }
+}
+
+const emptyResult: SearchResult = {
+    page: 0,
+    total_pages: 0,
+    total_results: 0,
+    results: []
+
+}
+
+export interface SearchEntry {
+    id: number;
+    title: string;
+    release_date: string;
+    overview: string;
+    popularity: number;
+    vote_count: number;
+    poster_path: string;
+    vote_average: number;
+}
+
+export interface SearchResult {
+    page: number;
+    results: Array<SearchEntry>;
+    total_results: number;
+    total_pages: number;
 }
 
 export default SearchService

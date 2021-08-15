@@ -3,17 +3,22 @@ import {useObservable} from "rxjs-hooks";
 import './MoviesApp.css';
 import Movie from "./components/Movie";
 import SearchBar from "./components/SearchBar";
-import SearchService from "./services/Search";
+import SearchService, {SearchResult} from "./services/Search";
 
 function MoviesApp() {
     const searchService = new SearchService();
-    const results: {results: Array<{id: number, title: string}>} = useObservable(() => searchService.results$, {results: []})
+    const results: SearchResult = useObservable(() => searchService.results$, {
+        results: [],
+        page: 0,
+        total_results: 0,
+        total_pages: 0
+    })
 
     return <React.Fragment>
         <section className={'container-fluid'}><SearchBar searchService={searchService}/></section>
         <main className={'container-fluid'}>
-            <section className={'row px-2'}>
-                <div className={'col d-grid gap-2'}>
+            <section className={''}>
+                <div className={''}>
                     {results.results.map(each => <Movie {...each}/>)}
                 </div>
             </section>
