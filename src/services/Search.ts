@@ -13,16 +13,16 @@ class SearchService {
         this.results$ = this._subject.asObservable();
     }
 
-    search(title: string, page = 1): Observable<any>{
-        if(title === '') {
+    search(searchTerm: string, page = 1): Observable<any>{
+        if(searchTerm === '') {
             this._subject.next(emptyResult);
             return of();
         }
 
-        const url = `${this._apiBasePath}?query=${title}&page=${page}&include_adult=false&api_key=${(this._apiKey)}`;
+        const url = `${this._apiBasePath}?query=${searchTerm}&page=${page}&include_adult=false&api_key=${(this._apiKey)}`;
         return from(fetch(url)
             .then(Response => Response.json())
-            .then(v => this._subject.next(v)));
+            .then(v => this._subject.next({searchTerm: searchTerm, ...v})));
             // TODO: .catch and do something with errors
     }
 }
@@ -31,8 +31,8 @@ const emptyResult: SearchResult = {
     page: 0,
     total_pages: 0,
     total_results: 0,
-    results: []
-
+    results: [],
+    searchTerm: undefined
 }
 
 export interface SearchEntry {
@@ -51,6 +51,7 @@ export interface SearchResult {
     results: Array<SearchEntry>;
     total_results: number;
     total_pages: number;
+    searchTerm: string|undefined;
 }
 
 export default SearchService
