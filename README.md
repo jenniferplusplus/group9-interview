@@ -39,3 +39,7 @@ It might be interesting to implement the sharable links feature suggested in the
 In order to make this into more of a useful standalone application, I could imagine implementing a lists feature for things like movies a user owns, wants, etc. Without a backend, that could be stored in local storage.
 
 TMDB provides search endpoints for people and tv shows, in addition to movies. I expect it would be straightforward to implement a similar feature for those searches. And it seems obvious to be able to open a detailed view for a selected movie (or person, etc) to see more information than the results list provides. 
+
+# Screenshot
+
+![Screenshot of the app](https://raw.githubusercontent.com/jenniferplusplus/group9-interview/main/resources/screenshot.png)
