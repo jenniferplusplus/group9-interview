@@ -42,4 +42,4 @@ TMDB provides search endpoints for people and tv shows, in addition to movies. I
 
 # Screenshot
 
-![Screenshot of the app](https://raw.githubusercontent.com/jenniferplusplus/group9-interview/main/resources/screenshot.png)
+![Screenshot of the app](./resources/screenshot.png)
