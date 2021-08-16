@@ -22,7 +22,11 @@ class SearchService {
         const url = `${this._apiBasePath}?query=${searchTerm}&page=${page}&include_adult=false&api_key=${(this._apiKey)}`;
         return from(fetch(url)
             .then(Response => Response.json())
-            .then(v => this._subject.next({searchTerm: searchTerm, ...v})));
+            .then(v => {
+                const next = {searchTerm: searchTerm, ...v};
+                this._subject.next(next);
+                return next;
+            }));
             // TODO: .catch and do something with errors
     }
 }

@@ -7,7 +7,7 @@ function Movie(props: SearchEntry) {
   const imgSize = 'w154';
 
   const year = new Date(props.release_date).getFullYear();
-  return <article className={'row mx-2 mb-4 mb-md-2'}>
+  return <article tabIndex={0} className={'row mx-2 mb-4 mb-md-2'}>
     <div className={'col-2 px-0'}>
       {/*TODO: Placeholder graphics for missing images*/}
       {props.poster_path && <img
