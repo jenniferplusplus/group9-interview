@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app is built with create-react-app, and it should be pretty easy to run. Just install the dependencies and then run the `start` script.
 
-## Available Scripts
+```bash
+npm i
+npm run start
+```
 
-In the project directory, you can run:
+# Design Decisions
 
-### `npm start`
+## Logic
+I built the react components entirely as function components, using hooks. To be honest, I haven't used react in a few years, and this seems to be the recommended approach for most cases.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I used the observer pattern, with service classes powered by RxJS to mediate communication between components and generally manage application state. I know redux is a more common way to do that. However, redux isn't very good at its stated goal of managing state and keeping components isolated from each other. Redux clients are required to implement reducers correctly, and badly implemented reducers can corrupt application state. Observables don't have that problem.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Design
 
-### `npm test`
+I kept pretty close to the provided wireframe, and I used Bootstrap for general styling. Bootstrap is fairly easy, and doesn't particularly rely on using its own components. Given this is a one-off interview exercise, I thought that would be for the best.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I tried to make the app as accessible as time allowed. In particular I made heavy use of semantic html elements. I also did some work to facilitate keyboard navigation through the list of search results.
 
-### `npm run build`
+Likewise, I tried to make the experience pleasant on mobile. The design is fluidly responsive, and works well down to quite small screen sizes. The search field highlights the current text on focus, which makes it easier to perform new searches with an on screen keyboard.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Testing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Tests are pretty basic, although that's probably to be expected because the app doesn't do all that much anyway. I only did snapshot testing on my components. It would be better to also test the event handlers, but I already spent more time on this than I wanted to. The search service, which is the core functional piece of the app, is very thoroughly tested.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Challenges
 
-### `npm run eject`
+Honestly, the biggest challenge is that I'm not in the habit of building hobby project apps from scratch like this. Setting up tooling, organizing a project, and figuring out how to use libraries and frameworks that I'm not familiar with tend to be pretty uncommon events in real work.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I did run into a problem mocking an RxJS function that I wanted to use to manage the api calls. I tried several methods of mocking it, but nothing worked. So I had to use a raw fetch instead, and mocked that using an npm package.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Future Enhancements
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+It might be interesting to implement the sharable links feature suggested in the spec document. In order to do that, I would likely want to implement a router to help manage those urls. I would also like to integrate the paging feature into those urls and allow the browser's back/forward feature to navigate through results pages.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+In order to make this into more of a useful standalone application, I could imagine implementing a lists feature for things like movies a user owns, wants, etc. Without a backend, that could be stored in local storage.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+TMDB provides search endpoints for people and tv shows, in addition to movies. I expect it would be straightforward to implement a similar feature for those searches. And it seems obvious to be able to open a detailed view for a selected movie (or person, etc) to see more information than the results list provides. 
